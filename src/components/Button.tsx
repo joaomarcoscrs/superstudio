@@ -13,7 +13,7 @@ const Button: React.FC<ButtonProps> = ({ label, action, style }) => {
   };
 
   return (
-    <button onClick={handleClick} style={style} className="rounded bg-gray-300">
+    <button onClick={handleClick} style={style} className="button">
       {label}
     </button>
   );
