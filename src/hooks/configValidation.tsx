@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import configSchema from "../schemas/configSchema";
+import configSchema from "../schemas/config";
 
 interface ValidationResult {
   isValid: boolean;
