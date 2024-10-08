@@ -28,6 +28,40 @@
   --button-hover-bg: rgb(var(--color-primary) / 0.9);
   --button-active-bg: rgb(var(--color-primary) / 0.8);
   --button-focus-ring: rgb(var(--color-primary) / 0.5);
+
+  /* New button variant tokens */
+  --button-secondary-bg: rgb(var(--color-secondary));
+  --button-secondary-text: var(--color-text-inverted);
+  --button-secondary-border: rgb(var(--color-secondary));
+
+  --button-success-bg: rgb(var(--color-success));
+  --button-success-text: var(--color-text-inverted);
+  --button-success-border: rgb(var(--color-success));
+
+  --button-danger-bg: rgb(var(--color-danger));
+  --button-danger-text: var(--color-text-inverted);
+  --button-danger-border: rgb(var(--color-danger));
+
+  --button-warning-bg: rgb(var(--color-warning));
+  --button-warning-text: var(--color-text-base);
+  --button-warning-border: rgb(var(--color-warning));
+
+  --button-info-bg: rgb(var(--color-info));
+  --button-info-text: var(--color-text-inverted);
+  --button-info-border: rgb(var(--color-info));
+
+  /* Button size tokens */
+  --button-padding-small: 0.25rem 0.5rem;
+  --button-padding-medium: 0.5rem 1rem;
+  --button-padding-large: 0.75rem 1.5rem;
+
+  --button-font-size-small: 0.875rem;
+  --button-font-size-medium: 1rem;
+  --button-font-size-large: 1.125rem;
+
+  /* Button appearance tokens */
+  --button-outlined-border-width: 2px;
+  --button-ghost-hover-opacity: 0.1;
 }
 
 /* Dark theme */
@@ -45,4 +79,6 @@
   /* Adjust component-specific tokens as needed */
   --button-text: var(--color-text-base);
   --button-border: transparent;
+
+  /* You may want to adjust other button variant tokens for dark theme if needed */
 }

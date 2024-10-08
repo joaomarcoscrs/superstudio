@@ -1,21 +1,122 @@
 .button {
-  @apply rounded font-medium py-2 px-4 shadow-md transition duration-300 ease-in-out;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: 1px solid var(--button-border);
-}
+  @apply rounded font-medium shadow-md transition duration-300 ease-in-out;
+  background-color: var(--button-bg, #e2e8f0);
+  color: var(--button-text, #1a202c);
+  border: 1px solid var(--button-border, #cbd5e0);
 
-.button:hover {
-  @apply shadow-lg;
-  background-color: var(--button-hover-bg);
-}
+  &:hover {
+    @apply shadow-lg;
+    background-color: var(--button-hover-bg, #cbd5e0);
+  }
 
-.button:active {
-  @apply shadow-inner;
-  background-color: var(--button-active-bg);
-}
+  &:active {
+    @apply shadow-inner;
+    background-color: var(--button-active-bg, #a0aec0);
+  }
 
-.button:focus {
-  @apply outline-none ring-2 ring-opacity-50;
-  --tw-ring-color: var(--button-focus-ring);
+  &:focus {
+    @apply outline-none ring-2 ring-opacity-50;
+    --tw-ring-color: var(--button-focus-ring, rgba(66, 153, 225, 0.5));
+  }
+
+  /* Sizes */
+  &.small {
+    @apply py-1 px-2 text-sm;
+  }
+
+  &.medium {
+    @apply py-2 px-4 text-base;
+  }
+
+  &.large {
+    @apply py-3 px-6 text-lg;
+  }
+
+  /* Variants */
+  &.primary {
+    --button-bg: rgb(var(--color-primary));
+    --button-text: var(--color-text-inverted);
+    --button-border: rgb(var(--color-primary));
+    --button-hover-bg: rgb(var(--color-primary) / 0.9);
+    --button-active-bg: rgb(var(--color-primary) / 0.8);
+    --button-focus-ring: rgb(var(--color-primary) / 0.5);
+  }
+
+  &.secondary {
+    --button-bg: rgb(var(--color-secondary));
+    --button-text: var(--color-text-inverted);
+    --button-border: rgb(var(--color-secondary));
+    --button-hover-bg: rgb(var(--color-secondary) / 0.9);
+    --button-active-bg: rgb(var(--color-secondary) / 0.8);
+    --button-focus-ring: rgb(var(--color-secondary) / 0.5);
+  }
+
+  &.success {
+    --button-bg: rgb(var(--color-success));
+    --button-text: var(--color-text-inverted);
+    --button-border: rgb(var(--color-success));
+    --button-hover-bg: rgb(var(--color-success) / 0.9);
+    --button-active-bg: rgb(var(--color-success) / 0.8);
+    --button-focus-ring: rgb(var(--color-success) / 0.5);
+  }
+
+  &.danger {
+    --button-bg: rgb(var(--color-danger));
+    --button-text: var(--color-text-inverted);
+    --button-border: rgb(var(--color-danger));
+    --button-hover-bg: rgb(var(--color-danger) / 0.9);
+    --button-active-bg: rgb(var(--color-danger) / 0.8);
+    --button-focus-ring: rgb(var(--color-danger) / 0.5);
+  }
+
+  &.warning {
+    --button-bg: rgb(var(--color-warning));
+    --button-text: var(--color-text-base);
+    --button-border: rgb(var(--color-warning));
+    --button-hover-bg: rgb(var(--color-warning) / 0.9);
+    --button-active-bg: rgb(var(--color-warning) / 0.8);
+    --button-focus-ring: rgb(var(--color-warning) / 0.5);
+  }
+
+  &.info {
+    --button-bg: rgb(var(--color-info));
+    --button-text: var(--color-text-inverted);
+    --button-border: rgb(var(--color-info));
+    --button-hover-bg: rgb(var(--color-info) / 0.9);
+    --button-active-bg: rgb(var(--color-info) / 0.8);
+    --button-focus-ring: rgb(var(--color-info) / 0.5);
+  }
+
+  /* Appearances */
+  &.filled {
+    /* Default style, no changes needed */
+  }
+
+  &.outlined {
+    background-color: transparent;
+    color: var(--button-bg);
+    border: 2px solid var(--button-bg);
+
+    &:hover {
+      background-color: var(--button-bg);
+      color: var(--button-text);
+    }
+  }
+
+  &.ghost {
+    background-color: transparent;
+    color: var(--button-bg);
+    border: none;
+    box-shadow: none;
+
+    &:hover {
+      background-color: var(--button-hover-bg);
+      color: var(--button-text);
+    }
+  }
+
+  &.disabled {
+    @apply opacity-50 cursor-not-allowed;
+    pointer-events: none;
+  }
 }
