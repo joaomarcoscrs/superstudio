@@ -1,0 +1,48 @@
+:root {
+  /* Colors */
+  --color-primary: 59 130 246; /* rgb values for blue-500 */
+  --color-secondary: 107 114 128; /* rgb values for gray-500 */
+  --color-success: 34 197 94; /* rgb values for green-500 */
+  --color-danger: 239 68 68; /* rgb values for red-500 */
+  --color-warning: 234 179 8; /* rgb values for yellow-500 */
+  --color-info: 6 182 212; /* rgb values for cyan-500 */
+
+  /* Neutral colors */
+  --color-background: 255 255 255; /* white */
+  --color-foreground: 0 0 0; /* black */
+
+  /* Text colors */
+  --color-text-base: 17 24 39; /* gray-900 */
+  --color-text-muted: 107 114 128; /* gray-500 */
+  --color-text-inverted: 255 255 255; /* white */
+
+  /* Semantic tokens */
+  --color-background-base: var(--color-background);
+  --color-background-muted: 249 250 251; /* gray-50 */
+  --color-border: 229 231 235; /* gray-200 */
+
+  /* Component-specific tokens */
+  --button-bg: rgb(var(--color-primary));
+  --button-text: var(--color-text-inverted);
+  --button-border: rgb(var(--color-primary));
+  --button-hover-bg: rgb(var(--color-primary) / 0.9);
+  --button-active-bg: rgb(var(--color-primary) / 0.8);
+  --button-focus-ring: rgb(var(--color-primary) / 0.5);
+}
+
+/* Dark theme */
+.dark {
+  --color-background: 17 24 39; /* gray-900 */
+  --color-foreground: 255 255 255; /* white */
+
+  --color-text-base: 243 244 246; /* gray-100 */
+  --color-text-muted: 156 163 175; /* gray-400 */
+  --color-text-inverted: 17 24 39; /* gray-900 */
+
+  --color-background-muted: 31 41 55; /* gray-800 */
+  --color-border: 75 85 99; /* gray-600 */
+
+  /* Adjust component-specific tokens as needed */
+  --button-text: var(--color-text-base);
+  --button-border: transparent;
+}

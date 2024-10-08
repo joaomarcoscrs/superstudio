@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 @layer base {
+  @import "./design-tokens.css";
   html {
     font-family: "Inter", sans-serif;
   }
