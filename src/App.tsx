@@ -2,6 +2,7 @@ import React from "react";
 import Renderer from "./components/Renderer";
 import useConfigValidation from "./hooks/configValidation";
 import sampleJson from "./examples/sample.json";
+
 function App() {
   const { isValid } = useConfigValidation(sampleJson);
 
