@@ -1,0 +1,60 @@
+{
+  "layout": {
+    "columns": 12,
+    "rowHeight": 50
+  },
+  "components": [
+    {
+      "id": "run-workflow-1",
+      "type": "button",
+      "x": 0,
+      "y": 0,
+      "width": 3,
+      "height": 1,
+      "properties": {
+        "text": "Click me!",
+        "action": "run-workflow",
+        "workflowId": "1"
+      }
+    },
+    {
+      "id": "dropzone1",
+      "type": "dropzone",
+      "x": 4,
+      "y": 0,
+      "width": 8,
+      "height": 4,
+      "properties": {
+        "text": {
+          "accept": "Drop files here",
+          "reject": "Pdf file less than 30mb",
+          "idle": "Upload resume"
+        },
+        "button": {
+          "size": "md",
+          "radius": "md",
+          "text": "Select files"
+        },
+        "targets": [
+          {
+            "id": "workflow-1-input-my-image-input",
+            "type": "image-input",
+            "workflowId": "1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "image-1",
+      "type": "image",
+      "x": 0,
+      "y": 5,
+      "width": 6,
+      "height": 4,
+      "properties": {
+        "src": "https://www.cattales.org/wp-content/uploads/sites/499/2023/07/Raccoons-7-6-23-scaled-e1689450033742.jpg",
+        "alt": "Cute raccoon"
+      }
+    }
+  ]
+}

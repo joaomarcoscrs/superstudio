@@ -1,13 +1,14 @@
 import '@mantine/core/styles.css';
 
 import { MantineProvider } from '@mantine/core';
-import { Router } from './Router';
+import config from '../examples/workflow-widget/data.json';
+import Renderer from './components/Renderer/Renderer';
 import { theme } from './theme';
 
 export default function App() {
   return (
     <MantineProvider theme={theme}>
-      <Router />
+      <Renderer config={config} />
     </MantineProvider>
   );
 }
