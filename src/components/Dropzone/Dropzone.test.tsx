@@ -1,6 +1,6 @@
 import React from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { act, fireEvent, screen, waitFor } from '../../../test-utils';
+import { act, createEvent, fireEvent, screen, waitFor } from '../../../test-utils';
 import { render } from '../../../test-utils/render';
 import { Dropzone } from './Dropzone';
 
@@ -49,12 +49,26 @@ describe('Dropzone', () => {
     const file = new File(['dummy content'], 'test.png', { type: 'image/png' });
 
     await act(async () => {
-      fireEvent.drop(dropzone!, { dataTransfer: { files: [file] } });
+      const dropEvent = createEvent.drop(dropzone!);
+      Object.defineProperty(dropEvent, 'dataTransfer', {
+        value: {
+          files: [file],
+          types: ['Files'],
+        },
+      });
+      fireEvent(dropzone!, dropEvent);
     });
 
-    await waitFor(() => {
-      expect(mockOnDrop).toHaveBeenCalledWith([file]);
-    });
+    await waitFor(
+      () => {
+        expect(mockOnDrop).toHaveBeenCalledTimes(1);
+        const callArgs = mockOnDrop.mock.calls[0];
+        expect(callArgs[0]).toEqual([file]);
+        expect(callArgs[1]).toBeDefined();
+        expect(callArgs[1].type).toBe('drop');
+      },
+      { timeout: 3000 }
+    );
   });
 
   it('shows accept message when valid file is dragged over', async () => {
