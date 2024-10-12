@@ -36,6 +36,7 @@ const Renderer: React.FC<RendererProps> = ({ config }) => {
         return (
           <Button
             key={component.id}
+            fullWidth
             style={style}
             onClick={() =>
               console.log(
