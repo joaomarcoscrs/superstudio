@@ -1,6 +1,6 @@
 import React from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { fireEvent, screen } from '../../../test-utils';
+import { act, fireEvent, screen, waitFor } from '../../../test-utils';
 import { render } from '../../../test-utils/render';
 import { Dropzone } from './Dropzone';
 
@@ -43,39 +43,55 @@ describe('Dropzone', () => {
 
   it('calls onDrop when files are dropped', async () => {
     render(<Dropzone {...defaultProps} />);
-    const dropzone = screen.getByText("Drag'n'drop files here to upload");
+    const dropzone = screen.getByText("Drag'n'drop files here to upload").closest('div');
+    expect(dropzone).toBeDefined();
 
     const file = new File(['dummy content'], 'test.png', { type: 'image/png' });
-    fireEvent.drop(dropzone, { dataTransfer: { files: [file] } });
 
-    expect(mockOnDrop).toHaveBeenCalledWith([file]);
-  });
-
-  it('shows accept message when valid file is dragged over', () => {
-    render(<Dropzone {...defaultProps} />);
-    const dropzone = screen.getByText("Drag'n'drop files here to upload");
-
-    fireEvent.dragEnter(dropzone, {
-      dataTransfer: {
-        types: ['Files'],
-        files: [new File([''], 'test.png', { type: 'image/png' })],
-      },
+    await act(async () => {
+      fireEvent.drop(dropzone!, { dataTransfer: { files: [file] } });
     });
 
-    expect(screen.getByText('Drop the files here')).toBeDefined();
+    await waitFor(() => {
+      expect(mockOnDrop).toHaveBeenCalledWith([file]);
+    });
   });
 
-  it('shows reject message when invalid file is dragged over', () => {
+  it('shows accept message when valid file is dragged over', async () => {
     render(<Dropzone {...defaultProps} />);
-    const dropzone = screen.getByText("Drag'n'drop files here to upload");
+    const dropzone = screen.getByText("Drag'n'drop files here to upload").closest('div');
+    expect(dropzone).toBeDefined();
 
-    fireEvent.dragEnter(dropzone, {
-      dataTransfer: {
-        types: ['Files'],
-        files: [new File([''], 'test.jpg', { type: 'image/jpeg' })],
-      },
+    await act(async () => {
+      fireEvent.dragEnter(dropzone!, {
+        dataTransfer: {
+          types: ['Files'],
+          files: [new File([''], 'test.png', { type: 'image/png' })],
+        },
+      });
     });
 
-    expect(screen.getByText('File type not accepted')).toBeDefined();
+    await waitFor(() => {
+      expect(screen.getByText('Drop the files here')).toBeDefined();
+    });
+  });
+
+  it('shows reject message when invalid file is dragged over', async () => {
+    render(<Dropzone {...defaultProps} />);
+    const dropzone = screen.getByText("Drag'n'drop files here to upload").closest('div');
+    expect(dropzone).toBeDefined();
+
+    await act(async () => {
+      fireEvent.dragEnter(dropzone!, {
+        dataTransfer: {
+          types: ['Files'],
+          files: [new File([''], 'test.pdf', { type: 'application/pdf' })],
+        },
+      });
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('File type not accepted')).toBeDefined();
+    });
   });
 });
