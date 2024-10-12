@@ -10,6 +10,7 @@ interface DropzoneProps {
     accept: string;
     reject: string;
     idle: string;
+    main: string;
   };
   onDrop: (files: File[]) => void;
   button?: {
@@ -31,8 +32,8 @@ export function Dropzone({ text, onDrop, button, style }: DropzoneProps) {
         onDrop={onDrop}
         className={classes.dropzone}
         radius="md"
-        accept={[MIME_TYPES.pdf]}
-        maxSize={30 * 1024 ** 2}
+        accept={[MIME_TYPES.png, MIME_TYPES.jpeg, MIME_TYPES.webp]}
+        maxSize={2 * 1024 ** 2}
       >
         <div style={{ pointerEvents: 'none' }}>
           <Group justify="center">
@@ -61,8 +62,7 @@ export function Dropzone({ text, onDrop, button, style }: DropzoneProps) {
             <MantineDropzone.Idle>{text.idle}</MantineDropzone.Idle>
           </Text>
           <Text ta="center" fz="sm" mt="xs" c="dimmed">
-            Drag&apos;n&apos;drop files here to upload. We can accept only <i>.pdf</i> files that
-            are less than 30mb in size.
+            {text.main}
           </Text>
         </div>
       </MantineDropzone>

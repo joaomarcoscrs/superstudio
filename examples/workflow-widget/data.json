@@ -28,7 +28,8 @@
         "text": {
           "accept": "Drop files here",
           "reject": "Pdf file less than 30mb",
-          "idle": "Upload resume"
+          "idle": "Upload resume",
+          "main": "Drag'n'drop files here to upload. We can accept only image files that are less than 2mb in size."
         },
         "button": {
           "size": "md",
