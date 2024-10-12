@@ -1,8 +1,9 @@
 import { useRef } from 'react';
 import { faCloudArrowUp, faDownload, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, Group, rem, Text, useMantineTheme } from '@mantine/core';
+import { Group, rem, Text, useMantineTheme } from '@mantine/core';
 import { Dropzone as MantineDropzone, MIME_TYPES } from '@mantine/dropzone';
+import Button, { ButtonProps } from '../Button/Button';
 import classes from './Dropzone.module.css';
 
 interface DropzoneProps {
@@ -10,18 +11,14 @@ interface DropzoneProps {
     accept: string;
     reject: string;
     idle: string;
-    main: string;
   };
+  label: string;
   onDrop: (files: File[]) => void;
-  button?: {
-    size: string;
-    radius: string;
-    text: string;
-  };
+  button?: ButtonProps;
   style?: React.CSSProperties;
 }
 
-export function Dropzone({ text, onDrop, button, style }: DropzoneProps) {
+const Dropzone: React.FC<DropzoneProps> = ({ text, label, onDrop, button, style }) => {
   const theme = useMantineTheme();
   const openRef = useRef<() => void>(null);
 
@@ -62,21 +59,24 @@ export function Dropzone({ text, onDrop, button, style }: DropzoneProps) {
             <MantineDropzone.Idle>{text.idle}</MantineDropzone.Idle>
           </Text>
           <Text ta="center" fz="sm" mt="xs" c="dimmed">
-            {text.main}
+            {label}
           </Text>
         </div>
       </MantineDropzone>
 
       {button && (
         <Button
+          onClick={() => openRef.current?.()}
           className={classes.control}
           size={button.size}
           radius={button.radius}
-          onClick={() => openRef.current?.()}
+          {...button}
         >
-          {button.text}
+          {button.label}
         </Button>
       )}
     </div>
   );
-}
+};
+
+export default Dropzone;

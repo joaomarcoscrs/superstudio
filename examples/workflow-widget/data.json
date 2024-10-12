@@ -12,13 +12,13 @@
       "width": 4,
       "height": 1,
       "properties": {
-        "text": "Click me!",
+        "label": "Click me!",
         "action": "run-workflow",
         "workflowId": "1"
       }
     },
     {
-      "id": "dropzone1",
+      "id": "dropzone-1",
       "type": "dropzone",
       "x": 4,
       "y": 0,
@@ -28,13 +28,13 @@
         "text": {
           "accept": "Drop files here",
           "reject": "Pdf file less than 30mb",
-          "idle": "Upload resume",
-          "main": "Drag'n'drop files here to upload. We can accept only image files that are less than 2mb in size."
+          "idle": "Upload resume"
         },
+        "label": "Drag'n'drop files here to upload. We can accept only image files that are less than 2mb in size.",
         "button": {
           "size": "md",
           "radius": "md",
-          "text": "Select files"
+          "label": "Select files"
         },
         "targets": [
           {

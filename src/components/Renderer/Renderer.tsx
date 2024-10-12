@@ -1,6 +1,5 @@
-import React from 'react';
-import { Button, Image, Paper, Text } from '@mantine/core';
-import { Dropzone } from '../Dropzone/Dropzone';
+import React, { lazy, Suspense } from 'react';
+import { Paper, Text } from '@mantine/core';
 
 interface LayoutConfig {
   columns: number;
@@ -21,8 +20,16 @@ interface RendererProps {
     components: ComponentConfig[];
   };
 }
+
+const componentMap: Record<string, React.LazyExoticComponent<React.ComponentType<any>>> = {
+  button: lazy(() => import('../Button/Button')),
+  dropzone: lazy(() => import('../Dropzone/Dropzone')),
+  image: lazy(() => import('../Image/Image')),
+};
+
 const Renderer: React.FC<RendererProps> = ({ config }) => {
   const { layout, components } = config;
+
   const renderComponent = (component: ComponentConfig) => {
     const style: React.CSSProperties = {
       position: 'absolute',
@@ -31,51 +38,32 @@ const Renderer: React.FC<RendererProps> = ({ config }) => {
       width: `${(component.width / layout.columns) * 100}%`,
       height: `${component.height * layout.rowHeight}px`,
     };
-    switch (component.type) {
-      case 'button':
-        return (
-          <Button
-            key={component.id}
-            fullWidth
-            style={style}
-            onClick={() =>
-              console.log(
-                `Action: ${component.properties.action}, WorkflowId: ${component.properties.workflowId}`
-              )
-            }
-          >
-            {component.properties.text}
-          </Button>
-        );
-      case 'dropzone':
-        return (
-          <Dropzone
-            key={component.id}
-            style={style}
-            onDrop={(files) => console.log('Dropped files:', files)}
-            text={component.properties.text}
-            button={component.properties.button}
-          />
-        );
-      case 'image':
-        return (
-          <Image
-            key={component.id}
-            src={component.properties.src}
-            alt={component.properties.alt}
-            style={style}
-            fit="contain"
-          />
-        );
-      default:
-        return (
-          <Paper key={component.id} style={style} p="md">
-            <Text>Unknown component type: {component.type}</Text>
-            <Text>{JSON.stringify(component)}</Text>
-          </Paper>
-        );
+
+    const DynamicComponent = componentMap[component.type];
+
+    if (DynamicComponent) {
+      return (
+        <Suspense
+          fallback={
+            <div key={component.id} style={style}>
+              Loading...
+            </div>
+          }
+          key={component.id}
+        >
+          <DynamicComponent key={component.id} style={style} {...component.properties} />
+        </Suspense>
+      );
     }
+
+    return (
+      <Paper key={component.id} style={style} p="md">
+        <Text>Unknown component type: {component.type}</Text>
+        <Text>{JSON.stringify(component)}</Text>
+      </Paper>
+    );
   };
+
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       {components.map(renderComponent)}
