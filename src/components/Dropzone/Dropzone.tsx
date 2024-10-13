@@ -32,24 +32,32 @@ const Dropzone: React.FC<DropzoneProps> = ({ text, label, onDrop, button, style 
         accept={[MIME_TYPES.png, MIME_TYPES.jpeg, MIME_TYPES.webp]}
         maxSize={2 * 1024 ** 2}
       >
-        <div style={{ pointerEvents: 'none' }}>
-          <Group justify="center">
+        <div
+          style={{
+            pointerEvents: 'none',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Group justify="center" align="center">
             <MantineDropzone.Accept>
               <FontAwesomeIcon
                 icon={faDownload}
-                style={{ width: rem(50), height: rem(50) }}
+                style={{ width: rem(40), height: rem(40) }}
                 color={theme.colors.blue[6]}
               />
             </MantineDropzone.Accept>
             <MantineDropzone.Reject>
               <FontAwesomeIcon
                 icon={faXmark}
-                style={{ width: rem(50), height: rem(50) }}
+                style={{ width: rem(40), height: rem(40) }}
                 color={theme.colors.red[6]}
               />
             </MantineDropzone.Reject>
             <MantineDropzone.Idle>
-              <FontAwesomeIcon icon={faCloudArrowUp} style={{ width: rem(50), height: rem(50) }} />
+              <FontAwesomeIcon icon={faCloudArrowUp} style={{ width: rem(40), height: rem(40) }} />
             </MantineDropzone.Idle>
           </Group>
 
@@ -61,20 +69,20 @@ const Dropzone: React.FC<DropzoneProps> = ({ text, label, onDrop, button, style 
           <Text ta="center" fz="sm" mt="xs" c="dimmed">
             {label}
           </Text>
+
+          {button && (
+            <Button
+              onClick={() => openRef.current?.()}
+              className={classes.dropzoneButton}
+              size={button.size}
+              radius={button.radius}
+              {...button}
+            >
+              {button.label}
+            </Button>
+          )}
         </div>
       </MantineDropzone>
-
-      {button && (
-        <Button
-          onClick={() => openRef.current?.()}
-          className={classes.control}
-          size={button.size}
-          radius={button.radius}
-          {...button}
-        >
-          {button.label}
-        </Button>
-      )}
     </div>
   );
 };

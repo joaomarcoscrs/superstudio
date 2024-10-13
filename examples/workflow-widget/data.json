@@ -27,8 +27,8 @@
       "properties": {
         "text": {
           "accept": "Drop files here",
-          "reject": "Pdf file less than 30mb",
-          "idle": "Upload resume"
+          "reject": "Images less than 2mb",
+          "idle": "Upload your image"
         },
         "label": "Drag'n'drop files here to upload. We can accept only image files that are less than 2mb in size.",
         "button": {
