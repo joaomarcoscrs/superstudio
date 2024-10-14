@@ -1,4 +1,4 @@
-import BaseAction from './Base';
+import BaseAction from '../Base/Base';
 
 class Debug extends BaseAction {
   run(...args: any[]) {

@@ -1,4 +1,4 @@
-import BaseAction from './actions/Base';
+import BaseAction from './actions/Base/Base';
 
 class ActionRunner {
   private action: BaseAction;
