@@ -1,26 +1,23 @@
 import React from 'react';
 import { Button as MantineButton, ButtonProps as MantineButtonProps } from '@mantine/core';
-import { Debug, Runner } from '../../actions-core';
+import { BaseAction, Debug, Runner } from '../../actions-core';
 
 export interface ButtonProps extends MantineButtonProps {
   label: string;
-  action?: string;
-  workflowId?: string;
-  onClick?: () => void;
+  action?: BaseAction;
+  actionArgs?: any[];
 }
 
-const Button: React.FC<ButtonProps> = ({ label, workflowId, action, onClick, ...props }) => {
-  const actionRunner = new Runner(new Debug());
+const Button: React.FC<ButtonProps> = ({
+  label,
+  action = new Debug(),
+  actionArgs = [],
+  ...props
+}) => {
+  const actionRunner = new Runner(action);
 
-  function handleClick() {
-    if (onClick) {
-      onClick();
-    } else if (action && workflowId) {
-      actionRunner.run(action, workflowId);
-    }
-  }
   return (
-    <MantineButton {...props} onClick={handleClick}>
+    <MantineButton {...props} onClick={() => actionRunner.run(...actionArgs)}>
       {label}
     </MantineButton>
   );

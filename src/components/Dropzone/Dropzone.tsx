@@ -3,6 +3,7 @@ import { faCloudArrowUp, faDownload, faXmark } from '@fortawesome/free-solid-svg
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Group, rem, Text, useMantineTheme } from '@mantine/core';
 import { Dropzone as MantineDropzone, MIME_TYPES } from '@mantine/dropzone';
+import { OpenDropzoneFilePicker } from '@/actions-core';
 import Button, { ButtonProps } from '../Button/Button';
 import classes from './Dropzone.module.css';
 
@@ -72,7 +73,8 @@ const Dropzone: React.FC<DropzoneProps> = ({ text, label, onDrop, button, style 
 
           {button && (
             <Button
-              onClick={() => openRef.current?.()}
+              action={new OpenDropzoneFilePicker()}
+              actionArgs={[openRef]}
               className={classes.dropzoneButton}
               size={button.size}
               radius={button.radius}

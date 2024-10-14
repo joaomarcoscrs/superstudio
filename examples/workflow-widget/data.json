@@ -13,8 +13,8 @@
       "height": 1,
       "properties": {
         "label": "Click me!",
-        "action": "run-workflow",
-        "workflowId": "1"
+        "action": "debug",
+        "actionArgs": ["1"]
       }
     },
     {

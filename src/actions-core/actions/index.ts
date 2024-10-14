@@ -1,3 +1,5 @@
+import BaseAction from './Base/Base';
 import Debug from './Debug/Debug';
+import OpenDropzoneFilePicker from './OpenDropzoneFilePicker/OpenDropzoneFilePicker';
 
-export { Debug };
+export { BaseAction, Debug, OpenDropzoneFilePicker };

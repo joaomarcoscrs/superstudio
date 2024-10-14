@@ -1,5 +1,6 @@
-import React, { lazy, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { Paper, Text } from '@mantine/core';
+import { componentMap, parseComponentProperties } from './helpers';
 
 const DEFAULT_LAYOUT = {
   columns: 12,
@@ -26,12 +27,6 @@ interface RendererProps {
   };
 }
 
-const componentMap: Record<string, React.LazyExoticComponent<React.ComponentType<any>>> = {
-  button: lazy(() => import('../Button/Button')),
-  dropzone: lazy(() => import('../Dropzone/Dropzone')),
-  image: lazy(() => import('../Image/Image')),
-};
-
 const Renderer: React.FC<RendererProps> = ({ config }) => {
   const { layout, components } = config;
 
@@ -56,7 +51,11 @@ const Renderer: React.FC<RendererProps> = ({ config }) => {
           }
           key={component.id}
         >
-          <DynamicComponent key={component.id} style={style} {...component.properties} />
+          <DynamicComponent
+            key={component.id}
+            style={style}
+            {...parseComponentProperties(component.properties)}
+          />
         </Suspense>
       );
     }

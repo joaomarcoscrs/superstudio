@@ -1,4 +1,4 @@
-import { Debug } from './Actions';
+import { BaseAction, Debug, OpenDropzoneFilePicker } from './Actions';
 import Runner from './Runner/Runner';
 
-export { Debug, Runner };
+export { BaseAction, Debug, Runner, OpenDropzoneFilePicker };
