@@ -16,6 +16,7 @@
     "vitest": "vitest run",
     "vitest:watch": "vitest",
     "test": "npm run typecheck && npm run prettier && npm run lint && npm run vitest && npm run build",
+    "coverage": "vitest --coverage",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build"
   },
