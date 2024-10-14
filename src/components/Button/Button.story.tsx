@@ -20,7 +20,7 @@ export const Default: Story = {
 export const WithCustomAction: Story = {
   args: {
     label: 'Custom Action',
-    action: new Debug(),
+    action: Debug,
     actionArgs: ['Custom debug message'],
   },
 };

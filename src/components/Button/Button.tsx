@@ -4,7 +4,7 @@ import { BaseAction, Debug, Runner } from '../../actions-core';
 
 export interface ButtonProps extends MantineButtonProps {
   label: string;
-  action?: BaseAction;
+  action?: typeof BaseAction;
   actionArgs?: any[];
 }
 

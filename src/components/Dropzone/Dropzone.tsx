@@ -73,7 +73,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ text, label, onDrop, button, style 
 
           {button && (
             <Button
-              action={new OpenDropzoneFilePicker()}
+              action={OpenDropzoneFilePicker}
               actionArgs={[openRef]}
               className={classes.dropzoneButton}
               size={button.size}
