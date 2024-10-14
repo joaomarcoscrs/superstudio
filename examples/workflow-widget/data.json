@@ -1,65 +1,22 @@
 {
   "layout": [
     {
-      "id": "section-1",
-      "type": "flex-container",
-      "direction": "row",
-      "justifyContent": "space-between",
-      "alignItems": "center",
-      "children": [
-        {
-          "id": "run-workflow-1",
-          "type": "button",
-          "flex": "0 0 auto",
-          "properties": {
-            "label": "Click me!",
-            "action": "debug",
-            "actionArgs": ["1"]
-          }
+      "id": "workflow-interface-1",
+      "type": "WorkflowInterface",
+      "className": "w-full h-full",
+      "properties": {
+        "uiId": "workflow-ui-1",
+        "workflowId": "1",
+        "imageSrc": "https://www.cattales.org/wp-content/uploads/sites/499/2023/07/Raccoons-7-6-23-scaled-e1689450033742.jpg",
+        "imageAlt": "Cute raccoon",
+        "dropzoneText": {
+          "accept": "Drop files here",
+          "reject": "Images less than 2mb",
+          "idle": "Upload your image"
         },
-        {
-          "id": "dropzone-1",
-          "type": "dropzone",
-          "flex": "1 1 auto",
-          "properties": {
-            "text": {
-              "accept": "Drop files here",
-              "reject": "Images less than 2mb",
-              "idle": "Upload your image"
-            },
-            "label": "Drag'n'drop files here to upload. We can accept only image files that are less than 2mb in size.",
-            "button": {
-              "size": "md",
-              "radius": "md",
-              "label": "Select files"
-            },
-            "targets": [
-              {
-                "id": "workflow-1-input-my-image-input",
-                "type": "image-input",
-                "workflowId": "1"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "section-2",
-      "type": "flex-container",
-      "direction": "column",
-      "justifyContent": "center",
-      "alignItems": "center",
-      "children": [
-        {
-          "id": "image-1",
-          "type": "image",
-          "properties": {
-            "src": "https://www.cattales.org/wp-content/uploads/sites/499/2023/07/Raccoons-7-6-23-scaled-e1689450033742.jpg",
-            "alt": "Cute raccoon"
-          }
-        }
-      ]
+        "dropzoneLabel": "Drag'n'drop files here to upload. We can accept only image files that are less than 2mb in size.",
+        "buttonLabel": "Run Workflow"
+      }
     }
   ]
 }

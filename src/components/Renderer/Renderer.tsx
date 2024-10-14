@@ -1,84 +1,60 @@
 import React, { Suspense } from 'react';
 import { Paper, Text } from '@mantine/core';
-import { componentMap, PropertyParser } from './helpers/index';
-
-interface FlexContainerConfig {
-  id: string;
-  type: 'flex-container';
-  direction: 'row' | 'column';
-  justifyContent: string;
-  alignItems: string;
-  children: (ComponentConfig | FlexContainerConfig)[];
-}
+import { interfaceMap, PropertyParser } from './helpers/index';
 
 interface ComponentConfig {
   id: string;
   type: string;
-  flex?: string;
+  className?: string;
   properties?: Record<string, any>;
+  children?: ComponentConfig[];
 }
 
 interface RendererProps {
   config: {
-    layout: (FlexContainerConfig | ComponentConfig)[];
+    layout: ComponentConfig[];
   };
 }
 
 const Renderer: React.FC<RendererProps> = ({ config }) => {
-  const renderComponent = (component: ComponentConfig | FlexContainerConfig) => {
-    if (component.type === 'flex-container') {
-      return renderFlexContainer(component as FlexContainerConfig);
-    }
+  const renderInterface = (interfaceConfig: ComponentConfig) => {
+    const UIComponent = interfaceMap[interfaceConfig.type as keyof typeof interfaceMap];
 
-    const style: React.CSSProperties = {
-      flex: (component as ComponentConfig).flex || '0 1 auto',
-    };
-
-    const DynamicComponent = componentMap[component.type];
-
-    if (DynamicComponent) {
+    if (UIComponent) {
       return (
         <Suspense
           fallback={
-            <div key={component.id} style={style}>
-              Loading...
+            <div
+              key={interfaceConfig.id}
+              className={interfaceConfig.className || 'flex items-center justify-center'}
+            >
+              Loading UI...
             </div>
           }
-          key={component.id}
+          key={interfaceConfig.id}
         >
-          <DynamicComponent
-            key={component.id}
-            style={style}
-            {...PropertyParser.parse((component as ComponentConfig).properties || {})}
+          <UIComponent
+            key={interfaceConfig.id}
+            className={interfaceConfig.className || 'flex items-center justify-center'}
+            {...PropertyParser.parse(interfaceConfig.properties || {})}
           />
         </Suspense>
       );
     }
 
     return (
-      <Paper key={component.id} style={style} p="md">
-        <Text>Unknown component type: {component.type}</Text>
-        <Text>{JSON.stringify(component)}</Text>
+      <Paper
+        key={interfaceConfig.id}
+        className={interfaceConfig.className || 'flex items-center justify-center'}
+        p="md"
+      >
+        <Text>Unknown UI type: {interfaceConfig.type}</Text>
+        <Text>{JSON.stringify(interfaceConfig)}</Text>
       </Paper>
     );
   };
 
-  const renderFlexContainer = (container: FlexContainerConfig) => {
-    const tailwindClasses = [
-      'flex',
-      container.direction === 'row' ? 'flex-row' : 'flex-col',
-      `justify-${container.justifyContent}`,
-      `items-${container.alignItems}`,
-    ].join(' ');
-
-    return (
-      <div key={container.id} className={tailwindClasses}>
-        {container.children.map(renderComponent)}
-      </div>
-    );
-  };
-
-  return <div className="w-full h-full">{config.layout.map(renderComponent)}</div>;
+  return <div className="w-full h-full flex flex-col">{config.layout.map(renderInterface)}</div>;
 };
 
 export default Renderer;
