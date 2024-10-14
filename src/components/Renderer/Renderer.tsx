@@ -1,9 +1,14 @@
 import React, { lazy, Suspense } from 'react';
 import { Paper, Text } from '@mantine/core';
 
+const DEFAULT_LAYOUT = {
+  columns: 12,
+  rowHeight: 50,
+};
+
 interface LayoutConfig {
-  columns: number;
-  rowHeight: number;
+  columns?: number;
+  rowHeight?: number;
 }
 interface ComponentConfig {
   id: string;
@@ -33,10 +38,10 @@ const Renderer: React.FC<RendererProps> = ({ config }) => {
   const renderComponent = (component: ComponentConfig) => {
     const style: React.CSSProperties = {
       position: 'absolute',
-      left: `${(component.x / layout.columns) * 100}%`,
-      top: `${component.y * layout.rowHeight}px`,
-      width: `${(component.width / layout.columns) * 100}%`,
-      height: `${component.height * layout.rowHeight}px`,
+      left: `${(component.x / (layout.columns || DEFAULT_LAYOUT.columns)) * 100}%`,
+      top: `${component.y * (layout.rowHeight || DEFAULT_LAYOUT.rowHeight)}px`,
+      width: `${(component.width / (layout.columns || DEFAULT_LAYOUT.columns)) * 100}%`,
+      height: `${component.height * (layout.rowHeight || DEFAULT_LAYOUT.rowHeight)}px`,
     };
 
     const DynamicComponent = componentMap[component.type];
