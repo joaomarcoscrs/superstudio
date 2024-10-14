@@ -64,21 +64,21 @@ const Renderer: React.FC<RendererProps> = ({ config }) => {
   };
 
   const renderFlexContainer = (container: FlexContainerConfig) => {
-    const style: React.CSSProperties = {
-      display: 'flex',
-      flexDirection: container.direction,
-      justifyContent: container.justifyContent,
-      alignItems: container.alignItems,
-    };
+    const tailwindClasses = [
+      'flex',
+      container.direction === 'row' ? 'flex-row' : 'flex-col',
+      `justify-${container.justifyContent}`,
+      `items-${container.alignItems}`,
+    ].join(' ');
 
     return (
-      <div key={container.id} style={style}>
+      <div key={container.id} className={tailwindClasses}>
         {container.children.map(renderComponent)}
       </div>
     );
   };
 
-  return <div style={{ width: '100%', height: '100%' }}>{config.layout.map(renderComponent)}</div>;
+  return <div className="w-full h-full">{config.layout.map(renderComponent)}</div>;
 };
 
 export default Renderer;
