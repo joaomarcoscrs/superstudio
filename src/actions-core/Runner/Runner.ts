@@ -1,6 +1,6 @@
-import BaseAction from './actions/Base/Base';
+import BaseAction from '../Actions/Base/Base';
 
-class ActionRunner {
+class Runner {
   private action: BaseAction;
 
   constructor(executor: BaseAction) {
@@ -8,8 +8,8 @@ class ActionRunner {
   }
 
   run(...args: any[]) {
-    this.action.run(...args);
+    return this.action.run(...args);
   }
 }
 
-export default ActionRunner;
+export default Runner;
