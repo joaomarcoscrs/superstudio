@@ -18,6 +18,7 @@ export const Default: Story = {
       idle: 'Upload files',
     },
     label: 'Upload files',
+    // eslint-disable-next-line no-console
     onDrop: (files) => console.log('Dropped files:', files),
   },
 };
