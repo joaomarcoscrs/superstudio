@@ -2,41 +2,36 @@ import React, { Suspense } from 'react';
 import { Paper, Text } from '@mantine/core';
 import { componentMap, PropertyParser } from './helpers/index';
 
-const DEFAULT_LAYOUT = {
-  columns: 12,
-  rowHeight: 50,
-};
-
-interface LayoutConfig {
-  columns?: number;
-  rowHeight?: number;
+interface FlexContainerConfig {
+  id: string;
+  type: 'flex-container';
+  direction: 'row' | 'column';
+  justifyContent: string;
+  alignItems: string;
+  children: (ComponentConfig | FlexContainerConfig)[];
 }
+
 interface ComponentConfig {
   id: string;
   type: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
+  flex?: string;
   properties: Record<string, any>;
 }
+
 interface RendererProps {
   config: {
-    layout?: LayoutConfig;
-    components: ComponentConfig[];
+    layout: (FlexContainerConfig | ComponentConfig)[];
   };
 }
 
 const Renderer: React.FC<RendererProps> = ({ config }) => {
-  const { layout, components } = config;
+  const renderComponent = (component: ComponentConfig | FlexContainerConfig) => {
+    if (component.type === 'flex-container') {
+      return renderFlexContainer(component as FlexContainerConfig);
+    }
 
-  const renderComponent = (component: ComponentConfig) => {
     const style: React.CSSProperties = {
-      position: 'absolute',
-      left: `${(component.x / (layout?.columns || DEFAULT_LAYOUT.columns)) * 100}%`,
-      top: `${component.y * (layout?.rowHeight || DEFAULT_LAYOUT.rowHeight)}px`,
-      width: `${(component.width / (layout?.columns || DEFAULT_LAYOUT.columns)) * 100}%`,
-      height: `${component.height * (layout?.rowHeight || DEFAULT_LAYOUT.rowHeight)}px`,
+      flex: (component as ComponentConfig).flex || '0 1 auto',
     };
 
     const DynamicComponent = componentMap[component.type];
@@ -54,7 +49,7 @@ const Renderer: React.FC<RendererProps> = ({ config }) => {
           <DynamicComponent
             key={component.id}
             style={style}
-            {...PropertyParser.parse(component.properties)}
+            {...PropertyParser.parse((component as ComponentConfig).properties)}
           />
         </Suspense>
       );
@@ -68,11 +63,22 @@ const Renderer: React.FC<RendererProps> = ({ config }) => {
     );
   };
 
-  return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      {components.map(renderComponent)}
-    </div>
-  );
+  const renderFlexContainer = (container: FlexContainerConfig) => {
+    const style: React.CSSProperties = {
+      display: 'flex',
+      flexDirection: container.direction,
+      justifyContent: container.justifyContent,
+      alignItems: container.alignItems,
+    };
+
+    return (
+      <div key={container.id} style={style}>
+        {container.children.map(renderComponent)}
+      </div>
+    );
+  };
+
+  return <div style={{ width: '100%', height: '100%' }}>{config.layout.map(renderComponent)}</div>;
 };
 
 export default Renderer;
