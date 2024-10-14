@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "npm run eslint && npm run stylelint",
     "eslint": "eslint . --cache",
-    "stylelint": "stylelint '**/*.css' --cache",
+    "stylelint": "stylelint '**/*.css' --cache --ignore-pattern 'coverage/**'",
     "prettier": "prettier --check \"**/*.{ts,tsx}\"",
     "prettier:write": "prettier --write \"**/*.{ts,tsx}\"",
     "vitest": "vitest run",
@@ -18,7 +18,8 @@
     "test": "npm run typecheck && npm run prettier && npm run lint && npm run vitest && npm run build",
     "coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build"
+    "storybook:build": "storybook build",
+    "list-test-files": "find . -name '*.test.ts' -o -name '*.test.tsx' -o -name '*.spec.ts' -o -name '*.spec.tsx' | grep -v 'node_modules' | grep -v 'coverage'"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
