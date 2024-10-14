@@ -22,7 +22,7 @@ describe('Button', () => {
   it('executes provided action on click', () => {
     const mockAction = {
       run: vi.fn(),
-    } as BaseAction;
+    } as unknown as typeof BaseAction;
     render(<Button label="Action Button" action={mockAction} />);
     fireEvent.click(screen.getByText('Action Button'));
     expect(mockAction.run).toHaveBeenCalled();
@@ -31,7 +31,7 @@ describe('Button', () => {
   it('passes actionArgs to the action execution', () => {
     const mockAction = {
       run: vi.fn(),
-    } as BaseAction;
+    } as unknown as typeof BaseAction;
     const actionArgs = ['arg1', 'arg2'];
     render(<Button label="Args Button" action={mockAction} actionArgs={actionArgs} />);
     fireEvent.click(screen.getByText('Args Button'));

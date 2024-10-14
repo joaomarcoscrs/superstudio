@@ -8,23 +8,20 @@ describe('OpenDropzoneFilePicker', () => {
       current: vi.fn(),
     };
 
-    const action = new OpenDropzoneFilePicker();
-    const result = action.run(mockOpenRef);
+    const result = OpenDropzoneFilePicker.run(mockOpenRef);
 
     expect(mockOpenRef.current).toHaveBeenCalled();
     expect(result).toBe(mockOpenRef);
   });
 
   it('should handle null openRef', () => {
-    const action = new OpenDropzoneFilePicker();
-    const result = action.run(null);
+    const result = OpenDropzoneFilePicker.run(null);
 
     expect(result).toBeNull();
   });
 
   it('should handle undefined openRef', () => {
-    const action = new OpenDropzoneFilePicker();
-    const result = action.run(undefined);
+    const result = OpenDropzoneFilePicker.run(undefined);
 
     expect(result).toBeUndefined();
   });
@@ -32,8 +29,7 @@ describe('OpenDropzoneFilePicker', () => {
   it('should handle openRef without current property', () => {
     const mockOpenRef: React.RefObject<() => void> = { current: null };
 
-    const action = new OpenDropzoneFilePicker();
-    const result = action.run(mockOpenRef);
+    const result = OpenDropzoneFilePicker.run(mockOpenRef);
 
     expect(result).toBe(mockOpenRef);
   });
@@ -41,8 +37,7 @@ describe('OpenDropzoneFilePicker', () => {
   it('should handle openRef without current function', () => {
     const mockOpenRef: React.RefObject<() => void> = { current: null };
 
-    const action = new OpenDropzoneFilePicker();
-    const result = action.run(mockOpenRef);
+    const result = OpenDropzoneFilePicker.run(mockOpenRef);
 
     expect(result).toBe(mockOpenRef);
   });

@@ -8,13 +8,8 @@ export interface ButtonProps extends MantineButtonProps {
   actionArgs?: any[];
 }
 
-const Button: React.FC<ButtonProps> = ({
-  label,
-  action = new Debug(),
-  actionArgs = [],
-  ...props
-}) => {
-  const actionRunner = new Runner(action);
+const Button: React.FC<ButtonProps> = ({ label, action = Debug, actionArgs = [], ...props }) => {
+  const actionRunner = new Runner(action as unknown as typeof BaseAction);
 
   return (
     <MantineButton {...props} onClick={() => actionRunner.run(...actionArgs)}>

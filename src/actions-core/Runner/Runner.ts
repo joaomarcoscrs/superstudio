@@ -1,14 +1,14 @@
 import BaseAction from '../Actions/Base/Base';
 
 class Runner {
-  private action: BaseAction;
+  private Action: typeof BaseAction;
 
-  constructor(executor: BaseAction) {
-    this.action = executor;
+  constructor(Action: typeof BaseAction) {
+    this.Action = Action;
   }
 
   run(...args: any[]) {
-    return this.action.run(...args);
+    return this.Action.run(...args);
   }
 }
 

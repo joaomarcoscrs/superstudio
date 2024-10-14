@@ -6,38 +6,39 @@ describe('Debug', () => {
     expect(Debug).toBeDefined();
   });
 
-  it('should be instantiable', () => {
-    const debug = new Debug();
-    expect(debug).toBeInstanceOf(Debug);
+  it('should have a static run method', () => {
+    expect(Debug.run).toBeInstanceOf(Function);
   });
 
-  it('should log to console when run method is called', () => {
-    const debug = new Debug();
+  it('should log to console when static run method is called', () => {
     const consoleSpy = vi.spyOn(console, 'log');
 
-    debug.run('test');
+    Debug.run('test');
 
     expect(consoleSpy).toHaveBeenCalledWith('Action being run', 'test');
     consoleSpy.mockRestore();
   });
 
   it('should handle multiple arguments', () => {
-    const debug = new Debug();
     const consoleSpy = vi.spyOn(console, 'log');
 
-    debug.run('arg1', 2, { key: 'value' });
+    Debug.run('arg1', 2, { key: 'value' });
 
     expect(consoleSpy).toHaveBeenCalledWith('Action being run', 'arg1', 2, { key: 'value' });
     consoleSpy.mockRestore();
   });
 
   it('should handle no arguments', () => {
-    const debug = new Debug();
     const consoleSpy = vi.spyOn(console, 'log');
 
-    debug.run();
+    Debug.run();
 
     expect(consoleSpy).toHaveBeenCalledWith('Action being run');
     consoleSpy.mockRestore();
+  });
+
+  it('should return the arguments passed to run', () => {
+    const result = Debug.run('arg1', 2, { key: 'value' });
+    expect(result).toEqual(['arg1', 2, { key: 'value' }]);
   });
 });

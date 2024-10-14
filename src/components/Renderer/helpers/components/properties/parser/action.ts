@@ -1,9 +1,9 @@
 import { BaseAction, Debug, OpenDropzoneFilePicker } from '@/actions-core';
 
 class ActionParser {
-  private static actionsMap: Record<string, BaseAction> = {
-    debug: new Debug(),
-    openDropzoneFilePicker: new OpenDropzoneFilePicker(),
+  private static actionsMap: Record<string, typeof BaseAction> = {
+    debug: Debug,
+    openDropzoneFilePicker: OpenDropzoneFilePicker,
   };
 
   static parse(action: string): BaseAction | undefined {

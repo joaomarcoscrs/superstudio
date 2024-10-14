@@ -6,12 +6,12 @@ describe('ActionParser', () => {
   describe('parse', () => {
     it('should return a Debug action for "debug" input', () => {
       const result = ActionParser.parse('debug');
-      expect(result).toBeInstanceOf(Debug);
+      expect(result).toBe(Debug);
     });
 
     it('should return an OpenDropzoneFilePicker action for "openDropzoneFilePicker" input', () => {
       const result = ActionParser.parse('openDropzoneFilePicker');
-      expect(result).toBeInstanceOf(OpenDropzoneFilePicker);
+      expect(result).toBe(OpenDropzoneFilePicker);
     });
 
     it('should return undefined for an unknown action', () => {
