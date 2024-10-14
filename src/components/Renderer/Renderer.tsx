@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Paper, Text } from '@mantine/core';
-import { componentMap, parseComponentProperties } from './helpers';
+import { componentMap, PropertyParser } from './helpers/index';
 
 const DEFAULT_LAYOUT = {
   columns: 12,
@@ -54,7 +54,7 @@ const Renderer: React.FC<RendererProps> = ({ config }) => {
           <DynamicComponent
             key={component.id}
             style={style}
-            {...parseComponentProperties(component.properties)}
+            {...PropertyParser.parse(component.properties)}
           />
         </Suspense>
       );
