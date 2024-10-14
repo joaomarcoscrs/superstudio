@@ -15,7 +15,7 @@ interface ComponentConfig {
   id: string;
   type: string;
   flex?: string;
-  properties: Record<string, any>;
+  properties?: Record<string, any>;
 }
 
 interface RendererProps {
@@ -49,7 +49,7 @@ const Renderer: React.FC<RendererProps> = ({ config }) => {
           <DynamicComponent
             key={component.id}
             style={style}
-            {...PropertyParser.parse((component as ComponentConfig).properties)}
+            {...PropertyParser.parse((component as ComponentConfig).properties || {})}
           />
         </Suspense>
       );
