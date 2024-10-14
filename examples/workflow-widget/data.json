@@ -1,8 +1,4 @@
 {
-  "layout": {
-    "columns": 12,
-    "rowHeight": 50
-  },
   "components": [
     {
       "id": "run-workflow-1",

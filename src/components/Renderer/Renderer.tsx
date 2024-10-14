@@ -22,7 +22,7 @@ interface ComponentConfig {
 }
 interface RendererProps {
   config: {
-    layout: LayoutConfig;
+    layout?: LayoutConfig;
     components: ComponentConfig[];
   };
 }
@@ -33,10 +33,10 @@ const Renderer: React.FC<RendererProps> = ({ config }) => {
   const renderComponent = (component: ComponentConfig) => {
     const style: React.CSSProperties = {
       position: 'absolute',
-      left: `${(component.x / (layout.columns || DEFAULT_LAYOUT.columns)) * 100}%`,
-      top: `${component.y * (layout.rowHeight || DEFAULT_LAYOUT.rowHeight)}px`,
-      width: `${(component.width / (layout.columns || DEFAULT_LAYOUT.columns)) * 100}%`,
-      height: `${component.height * (layout.rowHeight || DEFAULT_LAYOUT.rowHeight)}px`,
+      left: `${(component.x / (layout?.columns || DEFAULT_LAYOUT.columns)) * 100}%`,
+      top: `${component.y * (layout?.rowHeight || DEFAULT_LAYOUT.rowHeight)}px`,
+      width: `${(component.width / (layout?.columns || DEFAULT_LAYOUT.columns)) * 100}%`,
+      height: `${component.height * (layout?.rowHeight || DEFAULT_LAYOUT.rowHeight)}px`,
     };
 
     const DynamicComponent = componentMap[component.type];
