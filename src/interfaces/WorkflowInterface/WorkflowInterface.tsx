@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMantineColorScheme } from '@mantine/core';
+import { Stack, useMantineColorScheme } from '@mantine/core';
 import { Workflow, WorkflowExample } from '@/types/workflow';
 import WorkflowInputsInterface from './WorkflowInputsInterface';
 import WorkflowOutputsInterface from './WorkflowOutputsInterface';
@@ -12,7 +12,6 @@ export interface WorkflowInterfaceProps {
   examples: WorkflowExample[];
   workflowToken: string;
   className?: string;
-  domain?: string;
 }
 
 const WorkflowInterface: React.FC<WorkflowInterfaceProps> = ({
@@ -21,14 +20,15 @@ const WorkflowInterface: React.FC<WorkflowInterfaceProps> = ({
   workflow,
   examples,
   className,
-  domain = 'app.roboflow.com',
 }) => {
   console.log('debug: workflow', workflow, 'examples', examples, 'token', token);
   const { colorScheme } = useMantineColorScheme();
   return (
-    <div
+    <Stack
       id={interfaceId}
-      className={`flex flex-col ${className || ''} border rounded-md ${colorScheme === 'dark' ? 'border-gray-600' : 'border-gray-300'}`}
+      className={`${className || ''} border rounded-md ${colorScheme === 'dark' ? 'border-gray-600' : 'border-gray-300'}`}
+      p={0}
+      gap={0}
     >
       <WorkflowTopbarInterface workflow={workflow} token={token} />
       <div className="flex flex-grow flex-col md:flex-row">
@@ -48,7 +48,7 @@ const WorkflowInterface: React.FC<WorkflowInterfaceProps> = ({
           ]}
         />
       </div>
-    </div>
+    </Stack>
   );
 };
 
