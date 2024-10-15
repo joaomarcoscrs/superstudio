@@ -3,6 +3,7 @@ import { highlightSelectionMatches } from '@codemirror/search';
 import { EditorView } from '@codemirror/view';
 import ReactCodeMirror from '@uiw/react-codemirror';
 import { useMantineColorScheme } from '@mantine/core';
+import { image } from './extensions';
 import { roboDark, roboLight } from './themes';
 
 export interface JsonInputProps {
@@ -23,6 +24,7 @@ const JsonInput: React.FC<JsonInputProps> = ({ value, onChange, editable = false
         json(),
         EditorView.lineWrapping,
         highlightSelectionMatches({ highlightWordAroundCursor: true, minSelectionLength: 1 }),
+        image(),
       ]}
       theme={colorScheme === 'dark' ? roboDark : roboLight}
       editable={editable}

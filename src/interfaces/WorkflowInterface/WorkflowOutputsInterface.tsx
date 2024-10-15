@@ -13,7 +13,7 @@ const WorkflowOutputsInterface: React.FC<WorkflowOutputsInterfaceProps> = ({
   output,
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center w-full gap-2 font-mono">
+    <div className="flex flex-col items-center justify-center w-full max-h-full gap-2 font-mono">
       <JsonInput value={output} onChange={() => {}} />
     </div>
   );

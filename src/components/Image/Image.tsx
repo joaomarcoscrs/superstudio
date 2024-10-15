@@ -26,8 +26,9 @@ const Image: React.FC<ImageProps> = ({ fit = 'scale-down', style, className, alt
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
-        size="xl"
-        padding={0}
+        fullScreen
+        centered
+        padding={10}
         withCloseButton={false}
       >
         <div className="relative">
