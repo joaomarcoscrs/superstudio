@@ -5,7 +5,6 @@
       "type": "WorkflowInterface",
       "className": "w-full h-full",
       "properties": {
-        "uiId": "workflow-ui-1",
         "workflowId": "1"
       }
     }

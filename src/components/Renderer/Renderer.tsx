@@ -35,6 +35,7 @@ const Renderer: React.FC<RendererProps> = ({ config }) => {
         >
           <UIComponent
             key={interfaceConfig.id}
+            interfaceId={interfaceConfig.id}
             className={interfaceConfig.className || 'flex items-center justify-center'}
             {...PropertyParser.parse(interfaceConfig.properties || {})}
           />
