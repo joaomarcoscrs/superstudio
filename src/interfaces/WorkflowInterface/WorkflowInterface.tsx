@@ -30,10 +30,7 @@ const WorkflowInterface: React.FC<WorkflowInterfaceProps> = ({
       id={interfaceId}
       className={`flex flex-col ${className || ''} border rounded-md ${colorScheme === 'dark' ? 'border-gray-600' : 'border-gray-300'}`}
     >
-      <WorkflowTopbarInterface
-        workflow={workflow}
-        url={`https://${domain}/workflows/embed/${token}`}
-      />
+      <WorkflowTopbarInterface workflow={workflow} token={token} />
       <div className="flex flex-grow flex-col md:flex-row">
         <WorkflowInputsInterface workflowId={workflow.id} />
         <WorkflowOutputsInterface

@@ -17,7 +17,7 @@ const JsonInput: React.FC<JsonInputProps> = ({ value, onChange, editable = false
 
   return (
     <ReactCodeMirror
-      className="flex-grow w-full overflow-y-auto"
+      className="flex-grow h-full w-full overflow-y-auto"
       value={JSON.stringify(value, null, 2)}
       onChange={(value) => onChange(JSON.parse(value))}
       extensions={[

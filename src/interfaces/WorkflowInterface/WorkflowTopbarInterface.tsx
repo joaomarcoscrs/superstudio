@@ -4,16 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
 import { Anchor, Box, Button, Group, Image, useMantineColorScheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import { useRoboflowUrls } from '@/hooks/useRoboflowUrls';
 import { Workflow } from '@/types/workflow';
 
 export interface WorkflowTopbarInterfaceProps {
   workflow: Workflow;
-  url: string;
+  token: string;
 }
 
-const WorkflowTopbarInterface: React.FC<WorkflowTopbarInterfaceProps> = ({ workflow, url }) => {
+const WorkflowTopbarInterface: React.FC<WorkflowTopbarInterfaceProps> = ({ workflow, token }) => {
   const { colorScheme } = useMantineColorScheme();
   const isSmallScreen = useMediaQuery('(max-width: 640px)');
+  const { buildForkUrl, buildShareableUrl } = useRoboflowUrls();
 
   return (
     <Box
@@ -24,7 +26,7 @@ const WorkflowTopbarInterface: React.FC<WorkflowTopbarInterfaceProps> = ({ workf
     >
       <Group justify="space-between" wrap="nowrap">
         <Anchor
-          href={url}
+          href={buildShareableUrl(token)}
           target="_blank"
           truncate
           className={clsx(
@@ -40,7 +42,14 @@ const WorkflowTopbarInterface: React.FC<WorkflowTopbarInterfaceProps> = ({ workf
           </Group>
         </Anchor>
         <Group gap="xs">
-          <Button variant="light" radius="md" size="xs">
+          <Button
+            variant="light"
+            radius="md"
+            size="xs"
+            component="a"
+            href={buildForkUrl(token)}
+            target="_blank"
+          >
             <Group gap="xs" wrap="nowrap">
               <FontAwesomeIcon size="sm" icon={faCodeFork} />
               {isSmallScreen ? 'Fork' : 'Fork workflow'}
