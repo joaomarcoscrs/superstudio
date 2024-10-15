@@ -21,7 +21,7 @@ const WorkflowInterface: React.FC<WorkflowInterfaceProps> = ({ uiId, workflowId,
     <div id={uiId} className={`flex flex-col md:flex-row ${className || ''}`}>
       <div className="flex flex-col md:w-1/3 gap-2 p-2">
         <div className="flex h-1/2 sm:h-1/4 md:h-full md:flex-col items-center justify-center w-full gap-2">
-          <Image src={imageSrc} alt={imageAlt} className="md:w-full h-auto object-cover" />
+          <Image src={imageSrc} alt={imageAlt} className="md:w-full h-auto object-cover rounded" />
           <Dropzone
             className="w-full h-full bg-gray-100"
             label="Drop or upload an image here"
