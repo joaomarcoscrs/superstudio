@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Paper, Text } from '@mantine/core';
+import { Loader, Paper, Text } from '@mantine/core';
 import { interfaceMap, PropertyParser } from './helpers/index';
 
 interface ComponentConfig {
@@ -24,11 +24,8 @@ const Renderer: React.FC<RendererProps> = ({ config }) => {
       return (
         <Suspense
           fallback={
-            <div
-              key={interfaceConfig.id}
-              className={interfaceConfig.className || 'flex items-center justify-center'}
-            >
-              Loading UI...
+            <div key={interfaceConfig.id} className="flex flex-grow items-center justify-center">
+              <Loader />
             </div>
           }
           key={interfaceConfig.id}
