@@ -22,6 +22,7 @@
     "list-test-files": "find . -name '*.test.ts' -o -name '*.test.tsx' -o -name '*.spec.ts' -o -name '*.spec.tsx' | grep -v 'node_modules' | grep -v 'coverage'"
   },
   "dependencies": {
+    "@codemirror/lang-json": "^6.0.1",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
@@ -32,6 +33,8 @@
     "@mantine/core": "^7.13.2",
     "@mantine/dropzone": "^7.13.2",
     "@mantine/hooks": "^7.13.2",
+    "@uiw/codemirror-themes": "^4.23.5",
+    "@uiw/react-codemirror": "^4.23.5",
     "embla-carousel-react": "^7.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

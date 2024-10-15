@@ -16,7 +16,13 @@ const WorkflowInterface: React.FC<WorkflowInterfaceProps> = ({
   return (
     <div id={interfaceId} className={`flex flex-col md:flex-row ${className || ''}`}>
       <WorkflowInputsInterface workflowId={workflowId} />
-      <WorkflowOutputsInterface />
+      <WorkflowOutputsInterface
+        workflowId={workflowId}
+        output={{
+          key1: 'value1',
+          key2: 'value2',
+        }}
+      />
     </div>
   );
 };
