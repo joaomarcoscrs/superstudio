@@ -3,6 +3,7 @@ import { faArrowUpFromBracket, faCheck, faXmark } from '@fortawesome/free-solid-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Group, rem, Text, useMantineColorScheme, useMantineTheme } from '@mantine/core';
 import { Dropzone as MantineDropzone, MIME_TYPES } from '@mantine/dropzone';
+import { useMediaQuery } from '@mantine/hooks';
 import { OpenDropzoneFilePicker } from '@/actions-core';
 import Button, { ButtonProps } from '../Button/Button';
 
@@ -28,6 +29,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ text, label, onDrop, button, style,
   const theme = useMantineTheme();
   const { colorScheme } = useMantineColorScheme();
   const openRef = useRef<() => void>(null);
+  const isSmallScreen = useMediaQuery('(max-width: 640px)');
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
@@ -44,7 +46,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ text, label, onDrop, button, style,
       <MantineDropzone
         openRef={openRef}
         onDrop={onDrop}
-        className="flex w-full flex-col items-center p-2"
+        className="flex w-full flex-col items-center"
         radius="md"
         accept={[MIME_TYPES.png, MIME_TYPES.jpeg, MIME_TYPES.webp]}
         maxSize={2 * 1024 ** 2}
@@ -69,7 +71,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ text, label, onDrop, button, style,
               <MantineDropzone.Idle>{text.idle}</MantineDropzone.Idle>
             </Text>
           )}
-          <Text ta="center" fz={rem(10)} className="">
+          <Text ta="center" fz={isSmallScreen ? rem(10) : rem(12)} className="">
             {label}
           </Text>
 

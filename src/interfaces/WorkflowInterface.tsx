@@ -42,6 +42,7 @@ const WorkflowInterface: React.FC<WorkflowInterfaceProps> = ({ uiId, workflowId,
         <Button
           label="Run Workflow"
           icon={faPlay}
+          radius="md"
           action={Debug}
           actionArgs={['running workflow', workflowId]}
         />
