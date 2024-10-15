@@ -1,4 +1,5 @@
 import React from 'react';
+import { faFileImage } from '@fortawesome/free-regular-svg-icons';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { useMediaQuery } from '@mantine/hooks';
 import { Debug } from '@/actions-core';
@@ -30,6 +31,7 @@ const WorkflowInterface: React.FC<WorkflowInterfaceProps> = ({ uiId, workflowId,
               size: isSmallScreen ? 'compact-xs' : 'xs',
               radius: 'md',
               label: 'Browse file',
+              icon: faFileImage,
               variant: isSmallScreen ? 'subtle' : 'light',
             }}
             onDrop={(stuff) => {
