@@ -87,63 +87,27 @@ const imageField = StateField.define<DecorationSet>({
 
 function findBase64Images(view: EditorView): StateEffect<ImageState>[] {
   const effects: StateEffect<ImageState>[] = [];
+  const str = view.state.doc.toString();
 
-  syntaxTree(view.state).iterate({
-    enter: () => {},
-    leave: ({ type, from, to }) => {
-      const callExp: string = view.state.doc.sliceString(from, to);
+  // Use a regular expression to find base64 image objects
+  const regex = /"type"\s*:\s*"base64"\s*,\s*"value"\s*:\s*"([^"]+)"/g;
+  let match;
 
-      if (type.name === 'Object') {
-        let addComma = false;
-        let braceCount = 0;
+  while ((match = regex.exec(str)) !== null) {
+    const from = match.index;
+    const to = regex.lastIndex;
+    const base64Image = match[1];
 
-        let o;
-        try {
-          o = JSON.parse(callExp);
-        } catch (e) {
-          return;
-        }
-
-        if (o.type === 'base64' && o.value) {
-          let nextClosingBrace = to;
-          const str = view.state.doc.toString();
-
-          for (let i = to; i < str.length; i++) {
-            if (str[i] === '{') {
-              braceCount++;
-            } else if (str[i] === '}') {
-              braceCount--;
-            }
-
-            if (braceCount === 0) {
-              nextClosingBrace = i;
-              break;
-            }
-          }
-
-          if (str[nextClosingBrace + 1] === ',') {
-            to = nextClosingBrace + 2;
-            addComma = true;
-          } else if (str[nextClosingBrace] === ',') {
-            to = nextClosingBrace + 1;
-            addComma = true;
-          } else {
-            to = nextClosingBrace + 1;
-          }
-
-          effects.push(
-            addImageEffect.of({
-              from,
-              to,
-              base64Image: o.value,
-              alt: 'Base 64 Image',
-              addComma,
-            })
-          );
-        }
-      }
-    },
-  });
+    effects.push(
+      addImageEffect.of({
+        from,
+        to,
+        base64Image,
+        alt: 'Base 64 Image',
+        addComma: str[to] === ',' || str[to + 1] === ',',
+      })
+    );
+  }
 
   return effects;
 }
