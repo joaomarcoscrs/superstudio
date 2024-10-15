@@ -8,14 +8,12 @@ interface ImageProps extends MantineImageProps {
 
 const Image: React.FC<ImageProps> = ({ fit = 'scale-down', style, className, alt, ...props }) => {
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      <MantineImage
-        {...props}
-        className={`object-${fit} max-w-full max-h-full ${className}`}
-        style={{ width: 'auto', height: 'auto', ...style }}
-        alt={alt}
-      />
-    </div>
+    <MantineImage
+      {...props}
+      className={`object-${fit} max-w-full max-h-full ${className}`}
+      style={{ ...style }}
+      alt={alt}
+    />
   );
 };
 

@@ -1,14 +1,13 @@
 import { useRef } from 'react';
-import { faCloudArrowUp, faDownload, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faUpload, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Group, rem, Text, useMantineTheme } from '@mantine/core';
+import { Group, rem, Text, useMantineColorScheme, useMantineTheme } from '@mantine/core';
 import { Dropzone as MantineDropzone, MIME_TYPES } from '@mantine/dropzone';
 import { OpenDropzoneFilePicker } from '@/actions-core';
 import Button, { ButtonProps } from '../Button/Button';
-import classes from './Dropzone.module.css';
 
 interface DropzoneProps {
-  text: {
+  text?: {
     accept: string;
     reject: string;
     idle: string;
@@ -17,57 +16,59 @@ interface DropzoneProps {
   onDrop: (files: File[]) => void;
   button?: ButtonProps;
   style?: React.CSSProperties;
+  className?: string;
 }
 
-const Dropzone: React.FC<DropzoneProps> = ({ text, label, onDrop, button, style }) => {
+const ICON_SIZE = {
+  width: rem(18),
+  height: rem(18),
+};
+
+const Dropzone: React.FC<DropzoneProps> = ({ text, label, onDrop, button, style, className }) => {
   const theme = useMantineTheme();
+  const { colorScheme } = useMantineColorScheme();
   const openRef = useRef<() => void>(null);
 
   return (
-    <div className={classes.wrapper} style={style}>
+    <div
+      className={`relative border border-dashed rounded-md cursor-pointer flex items-center justify-center
+      ${colorScheme === 'dark' ? 'border-dark-300' : 'border-gray-400'} 
+      ${className}`}
+      style={style}
+    >
       <MantineDropzone
         openRef={openRef}
         onDrop={onDrop}
-        className={classes.dropzone}
+        className="flex w-full flex-col items-center p-2"
         radius="md"
         accept={[MIME_TYPES.png, MIME_TYPES.jpeg, MIME_TYPES.webp]}
         maxSize={2 * 1024 ** 2}
       >
-        <div
-          style={{
-            pointerEvents: 'none',
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
+        <div className="flex flex-col items-center justify-center w-full gap-2 p-4">
           <Group justify="center" align="center">
             <MantineDropzone.Accept>
               <FontAwesomeIcon
                 icon={faDownload}
-                style={{ width: rem(40), height: rem(40) }}
-                color={theme.colors.blue[6]}
+                style={ICON_SIZE}
+                color={theme.colors.purboflow[6]}
               />
             </MantineDropzone.Accept>
             <MantineDropzone.Reject>
-              <FontAwesomeIcon
-                icon={faXmark}
-                style={{ width: rem(40), height: rem(40) }}
-                color={theme.colors.red[6]}
-              />
+              <FontAwesomeIcon icon={faXmark} style={ICON_SIZE} color={theme.colors.red[6]} />
             </MantineDropzone.Reject>
             <MantineDropzone.Idle>
-              <FontAwesomeIcon icon={faCloudArrowUp} style={{ width: rem(40), height: rem(40) }} />
+              <FontAwesomeIcon icon={faUpload} style={ICON_SIZE} color={theme.colors.gray[7]} />
             </MantineDropzone.Idle>
           </Group>
 
-          <Text ta="center" fw={700} fz="lg" mt="xl">
-            <MantineDropzone.Accept>{text.accept}</MantineDropzone.Accept>
-            <MantineDropzone.Reject>{text.reject}</MantineDropzone.Reject>
-            <MantineDropzone.Idle>{text.idle}</MantineDropzone.Idle>
-          </Text>
-          <Text ta="center" fz="sm" mt="xs" c="dimmed">
+          {text && (
+            <Text ta="center" fw={700} fz="xs">
+              <MantineDropzone.Accept>{text.accept}</MantineDropzone.Accept>
+              <MantineDropzone.Reject>{text.reject}</MantineDropzone.Reject>
+              <MantineDropzone.Idle>{text.idle}</MantineDropzone.Idle>
+            </Text>
+          )}
+          <Text ta="center" fz={rem(10)} c="dimmed">
             {label}
           </Text>
 
@@ -75,7 +76,6 @@ const Dropzone: React.FC<DropzoneProps> = ({ text, label, onDrop, button, style 
             <Button
               action={OpenDropzoneFilePicker}
               actionArgs={[openRef]}
-              className={classes.dropzoneButton}
               size={button.size}
               radius={button.radius}
               {...button}
