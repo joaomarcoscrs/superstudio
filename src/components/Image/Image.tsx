@@ -1,5 +1,10 @@
-import React from 'react';
-import { Image as MantineImage, ImageProps as MantineImageProps } from '@mantine/core';
+import React, { useState } from 'react';
+import {
+  CloseButton,
+  Image as MantineImage,
+  ImageProps as MantineImageProps,
+  Modal,
+} from '@mantine/core';
 
 interface ImageProps extends MantineImageProps {
   fit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
@@ -7,13 +12,35 @@ interface ImageProps extends MantineImageProps {
 }
 
 const Image: React.FC<ImageProps> = ({ fit = 'scale-down', style, className, alt, ...props }) => {
+  const [opened, setOpened] = useState(false);
+
   return (
-    <MantineImage
-      {...props}
-      className={`object-${fit} max-w-full max-h-full ${className}`}
-      style={{ ...style }}
-      alt={alt}
-    />
+    <>
+      <MantineImage
+        {...props}
+        className={`object-${fit} max-w-full max-h-full ${className} cursor-pointer`}
+        style={{ ...style }}
+        alt={alt}
+        onClick={() => setOpened(true)}
+      />
+      <Modal
+        opened={opened}
+        onClose={() => setOpened(false)}
+        size="xl"
+        padding={0}
+        withCloseButton={false}
+      >
+        <div className="relative">
+          <CloseButton
+            onClick={() => setOpened(false)}
+            className="absolute top-2 right-2 z-10"
+            size="sm"
+            variant="transparent"
+          />
+          <MantineImage {...props} className="w-full h-full object-contain" alt={alt} />
+        </div>
+      </Modal>
+    </>
   );
 };
 
