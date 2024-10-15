@@ -28,8 +28,8 @@ const WorkflowInterface: React.FC<WorkflowInterfaceProps> = ({ uiId, workflowId,
             button={{
               size: isSmallScreen ? 'compact-xs' : 'xs',
               radius: 'md',
-              label: 'Select files',
-              variant: 'light',
+              label: 'Browse file',
+              variant: isSmallScreen ? 'subtle' : 'light',
             }}
             onDrop={(stuff) => {
               console.log(`Dropped files`, stuff);

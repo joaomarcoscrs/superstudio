@@ -30,11 +30,16 @@ const Dropzone: React.FC<DropzoneProps> = ({ text, label, onDrop, button, style,
   const openRef = useRef<() => void>(null);
 
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
       className={`relative border border-dashed rounded-md cursor-pointer flex items-center justify-center
-      ${colorScheme === 'dark' ? 'border-dark-300' : 'border-gray-400'} 
+      ${colorScheme === 'dark' ? 'border-dark-300' : 'border-gray-400 hover:border-purboflow-500 text-gray-500 hover:text-purboflow-500 hover:bg-purboflow-50'} 
       ${className}`}
       style={style}
+      onClick={(e) => {
+        e.stopPropagation();
+        openRef.current?.();
+      }}
     >
       <MantineDropzone
         openRef={openRef}
@@ -57,7 +62,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ text, label, onDrop, button, style,
               <FontAwesomeIcon icon={faXmark} style={ICON_SIZE} color={theme.colors.red[6]} />
             </MantineDropzone.Reject>
             <MantineDropzone.Idle>
-              <FontAwesomeIcon icon={faUpload} style={ICON_SIZE} color={theme.colors.gray[7]} />
+              <FontAwesomeIcon icon={faUpload} style={ICON_SIZE} />
             </MantineDropzone.Idle>
           </Group>
 
@@ -68,7 +73,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ text, label, onDrop, button, style,
               <MantineDropzone.Idle>{text.idle}</MantineDropzone.Idle>
             </Text>
           )}
-          <Text ta="center" fz={rem(10)} c="dimmed">
+          <Text ta="center" fz={rem(10)} className="">
             {label}
           </Text>
 
