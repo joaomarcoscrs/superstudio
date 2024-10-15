@@ -30,6 +30,11 @@ const Image: React.FC<ImageProps> = ({ fit = 'scale-down', style, className, alt
         centered
         padding={10}
         withCloseButton={false}
+        styles={{
+          body: {
+            backgroundColor: 'transparent',
+          },
+        }}
       >
         <div className="relative">
           <CloseButton
