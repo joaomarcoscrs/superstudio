@@ -5,6 +5,7 @@
       "type": "WorkflowInterface",
       "className": "w-full h-full",
       "properties": {
+        "domain": "localhost.roboflow.one",
         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3b3JrZmxvd0lkIjoidXFSSDgwVlFrcUV5OXp4cHp0bUYiLCJ3b3Jrc3BhY2VJZCI6ImtyT1RBYm5jRmhvUU1DZExPbGU0IiwidXNlcklkIjoiRVJNUFBZY3FQMmZWWjB1NkRpNXZaYXJDdlZPMiIsImlhdCI6MTcyNzA5NTQ0MX0.ZViKmHztQzhyLhyGjWEVF0zaku1DD0OjnfoM0YGvDIY",
         "workflow": {
           "owner": "krOTAbncFhoQMCdLOle4",
