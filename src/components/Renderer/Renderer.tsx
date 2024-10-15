@@ -18,9 +18,9 @@ interface RendererProps {
 
 const Renderer: React.FC<RendererProps> = ({ config }) => {
   const renderInterface = (interfaceConfig: ComponentConfig) => {
-    const UIComponent = interfaceMap[interfaceConfig.type as keyof typeof interfaceMap];
+    const Interface = interfaceMap[interfaceConfig.type as keyof typeof interfaceMap];
 
-    if (UIComponent) {
+    if (Interface) {
       return (
         <Suspense
           fallback={
@@ -30,7 +30,7 @@ const Renderer: React.FC<RendererProps> = ({ config }) => {
           }
           key={interfaceConfig.id}
         >
-          <UIComponent
+          <Interface
             key={interfaceConfig.id}
             interfaceId={interfaceConfig.id}
             className={interfaceConfig.className || 'flex items-center justify-center'}
@@ -46,7 +46,7 @@ const Renderer: React.FC<RendererProps> = ({ config }) => {
         className={interfaceConfig.className || 'flex items-center justify-center'}
         p="md"
       >
-        <Text>Unknown UI type: {interfaceConfig.type}</Text>
+        <Text>Unknown interface: {interfaceConfig.type}</Text>
         <Text>{JSON.stringify(interfaceConfig)}</Text>
       </Paper>
     );
