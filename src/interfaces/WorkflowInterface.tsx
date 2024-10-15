@@ -30,8 +30,8 @@ const WorkflowInterface: React.FC<WorkflowInterfaceProps> = ({
   buttonLabel,
 }) => {
   return (
-    <div id={uiId} className={`workflow-ui ${className || ''}`}>
-      <div className="flex flex-col w-full gap-4">
+    <div id={uiId} className={`flex flex-col md:flex-row ${className || ''}`}>
+      <div className="flex flex-col w-1/3 gap-4">
         <Image src={imageSrc} alt={imageAlt} className="w-full h-auto object-cover" />
         <Dropzone
           text={dropzoneText}
@@ -47,6 +47,7 @@ const WorkflowInterface: React.FC<WorkflowInterfaceProps> = ({
         />
         <Button label={buttonLabel} action={Debug} actionArgs={['running workflow', workflowId]} />
       </div>
+      <div className="flex flex-col items-center justify-center w-full gap-4">output here</div>
     </div>
   );
 };
