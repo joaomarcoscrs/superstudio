@@ -1,4 +1,5 @@
 import { json } from '@codemirror/lang-json';
+import { highlightSelectionMatches } from '@codemirror/search';
 import { EditorView } from '@codemirror/view';
 import ReactCodeMirror from '@uiw/react-codemirror';
 import { useMantineColorScheme } from '@mantine/core';
@@ -12,6 +13,7 @@ export interface JsonInputProps {
 
 const JsonInput: React.FC<JsonInputProps> = ({ value, onChange, editable = false }) => {
   const { colorScheme } = useMantineColorScheme();
+
   return (
     <ReactCodeMirror
       className="flex-grow w-full overflow-y-auto"
@@ -19,11 +21,8 @@ const JsonInput: React.FC<JsonInputProps> = ({ value, onChange, editable = false
       onChange={(value) => onChange(JSON.parse(value))}
       extensions={[
         json(),
-        EditorView.theme({
-          '&': { fontSize: '14px' },
-          '.cm-selectionMatch': { backgroundColor: 'transparent' },
-        }),
         EditorView.lineWrapping,
+        highlightSelectionMatches({ highlightWordAroundCursor: true, minSelectionLength: 1 }),
       ]}
       theme={colorScheme === 'dark' ? roboDark : roboLight}
       editable={editable}
