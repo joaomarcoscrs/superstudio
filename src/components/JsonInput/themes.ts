@@ -8,8 +8,8 @@ export const roboLight = createTheme({
     backgroundImage: '',
     foreground: '#000000',
     caret: '#AEAFAD',
-    selection: '#FF000080', // Red with 50% opacity
-    selectionMatch: '#FF000080', // Red with 50% opacity
+    selection: '#8315F940', // Darker purple with 25% opacity
+    selectionMatch: '#8315F940', // Darker purple with 25% opacity
     gutterBackground: '#f3f4f6',
     gutterForeground: '#4b0496',
     gutterBorder: '#c7c7c7',
@@ -46,8 +46,8 @@ export const roboDark = createTheme({
     backgroundImage: '',
     foreground: '#e2e8f0', // Tailwind gray-200
     caret: '#8315F9', // purboflow-400
-    selection: '#FF000080', // Red with 50% opacity
-    selectionMatch: 'transparent',
+    selection: '#8315F980', // Dark purple with 50% opacity
+    selectionMatch: '#8315F980', // Dark purple with 50% opacity
     gutterBackground: '#1f2937', // Tailwind gray-800
     gutterForeground: '#A351FB', // purboflow-300
     gutterBorder: '#374151', // Tailwind gray-700
