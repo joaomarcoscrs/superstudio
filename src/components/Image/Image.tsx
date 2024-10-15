@@ -28,10 +28,11 @@ const Image: React.FC<ImageProps> = ({ fit = 'scale-down', style, className, alt
         onClose={() => setOpened(false)}
         fullScreen
         centered
+        closeOnClickOutside
         padding={10}
         withCloseButton={false}
         styles={{
-          body: {
+          content: {
             backgroundColor: 'transparent',
           },
         }}
@@ -43,7 +44,7 @@ const Image: React.FC<ImageProps> = ({ fit = 'scale-down', style, className, alt
             size="sm"
             variant="transparent"
           />
-          <MantineImage {...props} className="w-full h-full object-contain" alt={alt} />
+          <MantineImage {...props} className="w-full h-full object-contain rounded-lg" alt={alt} />
         </div>
       </Modal>
     </>

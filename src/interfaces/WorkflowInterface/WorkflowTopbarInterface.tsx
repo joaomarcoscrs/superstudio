@@ -1,10 +1,11 @@
 import React from 'react';
+import { Workflow } from '@/types/workflow';
 
 export interface WorkflowTopbarInterfaceProps {
-  workflowId: string;
+  workflow: Workflow;
 }
 
-const WorkflowTopbarInterface: React.FC<WorkflowTopbarInterfaceProps> = ({ workflowId }) => {
+const WorkflowTopbarInterface: React.FC<WorkflowTopbarInterfaceProps> = ({ workflow }) => {
   return <div>WorkflowTopbarInterface</div>;
 };
 

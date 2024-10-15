@@ -1,26 +1,38 @@
 import React from 'react';
+import { useMantineColorScheme } from '@mantine/core';
+import { Workflow, WorkflowExample } from '@/types/workflow';
 import WorkflowInputsInterface from './WorkflowInputsInterface';
 import WorkflowOutputsInterface from './WorkflowOutputsInterface';
 import WorkflowTopbarInterface from './WorkflowTopbarInterface';
 
 export interface WorkflowInterfaceProps {
   interfaceId: string;
-  workflowId: string;
+  token: string;
+  workflow: Workflow;
+  examples: WorkflowExample[];
+  workflowToken: string;
   className?: string;
 }
 
 const WorkflowInterface: React.FC<WorkflowInterfaceProps> = ({
   interfaceId,
-  workflowId,
+  token,
+  workflow,
+  examples,
   className,
 }) => {
+  console.log('debug: workflow', workflow, 'examples', examples, 'token', token);
+  const { colorScheme } = useMantineColorScheme();
   return (
-    <div id={interfaceId} className={`flex flex-col ${className || ''}`}>
-      <WorkflowTopbarInterface workflowId={workflowId} />
+    <div
+      id={interfaceId}
+      className={`flex flex-col ${className || ''} border rounded-md ${colorScheme === 'dark' ? 'border-gray-600' : 'border-gray-300'}`}
+    >
+      <WorkflowTopbarInterface workflow={workflow} />
       <div className="flex flex-grow flex-col md:flex-row">
-        <WorkflowInputsInterface workflowId={workflowId} />
+        <WorkflowInputsInterface workflowId={workflow.id} />
         <WorkflowOutputsInterface
-          workflowId={workflowId}
+          workflowId={workflow.id}
           output={[
             {
               text_output: 'hey yo',
