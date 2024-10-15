@@ -1,4 +1,5 @@
 import React from 'react';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { useMediaQuery } from '@mantine/hooks';
 import { Debug } from '@/actions-core';
 import Button from '@/components/Button/Button';
@@ -36,7 +37,12 @@ const WorkflowInterface: React.FC<WorkflowInterfaceProps> = ({ uiId, workflowId,
             }}
           />
         </div>
-        <Button label="Run Workflow" action={Debug} actionArgs={['running workflow', workflowId]} />
+        <Button
+          label="Run Workflow"
+          icon={faPlay}
+          action={Debug}
+          actionArgs={['running workflow', workflowId]}
+        />
       </div>
       <div className="flex flex-col items-center justify-center w-full gap-2">output here</div>
     </div>

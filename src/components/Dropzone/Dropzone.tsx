@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { faDownload, faUpload, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpFromBracket, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Group, rem, Text, useMantineColorScheme, useMantineTheme } from '@mantine/core';
 import { Dropzone as MantineDropzone, MIME_TYPES } from '@mantine/dropzone';
@@ -52,17 +52,13 @@ const Dropzone: React.FC<DropzoneProps> = ({ text, label, onDrop, button, style,
         <div className="flex flex-col items-center justify-center w-full gap-2 p-4">
           <Group justify="center" align="center">
             <MantineDropzone.Accept>
-              <FontAwesomeIcon
-                icon={faDownload}
-                style={ICON_SIZE}
-                color={theme.colors.purboflow[6]}
-              />
+              <FontAwesomeIcon icon={faCheck} style={ICON_SIZE} color={theme.colors.purboflow[6]} />
             </MantineDropzone.Accept>
             <MantineDropzone.Reject>
               <FontAwesomeIcon icon={faXmark} style={ICON_SIZE} color={theme.colors.red[6]} />
             </MantineDropzone.Reject>
             <MantineDropzone.Idle>
-              <FontAwesomeIcon icon={faUpload} style={ICON_SIZE} />
+              <FontAwesomeIcon icon={faArrowUpFromBracket} style={ICON_SIZE} />
             </MantineDropzone.Idle>
           </Group>
 
