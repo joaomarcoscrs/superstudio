@@ -20,7 +20,7 @@ const WorkflowInputsInterface: React.FC<WorkflowInputsInterfaceProps> = ({ workf
   const isSmallScreen = useMediaQuery('(max-width: 640px)');
 
   return (
-    <Stack className="h-1/4 md:h-full md:w-1/3 p-2 flex flex-col" gap="xs" p="xs">
+    <Stack className="min-h-[180px] h-1/4 md:h-full md:w-1/3 p-2 flex flex-col" gap="xs" p="xs">
       <div className="flex flex-1 md:flex-col items-center justify-center w-full gap-2 overflow-hidden">
         <Image
           src={imageSrc}
