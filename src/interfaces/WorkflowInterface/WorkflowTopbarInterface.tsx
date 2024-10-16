@@ -1,5 +1,6 @@
 import React from 'react';
-import { faCodeFork } from '@fortawesome/free-solid-svg-icons';
+import { faCodeFork, faExpand } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
 import { Anchor, Box, Group, Image, useMantineColorScheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
@@ -39,6 +40,7 @@ const WorkflowTopbarInterface: React.FC<WorkflowTopbarInterfaceProps> = ({ workf
           <Group gap="xs" wrap="nowrap">
             <Image src="https://app.roboflow.com/images/logomark-color-white-fill.svg" width={24} />
             {workflow.name}
+            <FontAwesomeIcon icon={faExpand} />
           </Group>
         </Anchor>
         <Group gap="xs">
