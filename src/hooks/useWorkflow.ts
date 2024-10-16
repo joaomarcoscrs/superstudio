@@ -3,18 +3,27 @@ import { useMemo } from 'react';
 const DEFAULT_ROBOFLOW_DOMAIN = 'app.roboflow.com';
 
 interface WorkflowUtils {
-  urls: {
-    shareable: (token: string) => string;
-    fork: (token: string) => string;
-  };
+  urls: UrlBuilder;
 }
 
-function shareableUrl(baseUrl: string, token: string) {
-  return `${baseUrl}/workflows/embed/${token}`;
-}
+class UrlBuilder {
+  private baseUrl: string;
 
-function forkUrl(baseUrl: string, token: string) {
-  return `${baseUrl}/workflows/fork/${token}`;
+  constructor(domain: string) {
+    this.baseUrl = `https://${domain}`;
+  }
+
+  private _workflowUrl(path: string, token: string) {
+    return `${this.baseUrl}/workflows/${path}/${token}`;
+  }
+
+  shareable(token: string) {
+    return this._workflowUrl('embed', token);
+  }
+
+  fork(token: string) {
+    return this._workflowUrl('fork', token);
+  }
 }
 
 export function useWorkflow(): WorkflowUtils {
@@ -22,12 +31,9 @@ export function useWorkflow(): WorkflowUtils {
     return import.meta.env.VITE_ROBOFLOW_DOMAIN || DEFAULT_ROBOFLOW_DOMAIN;
   }, []);
 
-  const baseUrl = `https://${domain}`;
+  const urls = new UrlBuilder(domain);
 
   return {
-    urls: {
-      shareable: (token: string) => shareableUrl(baseUrl, token),
-      fork: (token: string) => forkUrl(baseUrl, token),
-    },
+    urls,
   };
 }
