@@ -9,6 +9,9 @@ export interface ButtonProps extends MantineButtonProps {
   icon?: IconDefinition;
   action?: typeof BaseAction;
   actionArgs?: any[];
+  component?: 'button' | 'a';
+  href?: string;
+  target?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({

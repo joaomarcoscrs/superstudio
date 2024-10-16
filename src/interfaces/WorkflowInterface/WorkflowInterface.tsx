@@ -31,7 +31,7 @@ const WorkflowInterface: React.FC<WorkflowInterfaceProps> = ({
       gap={0}
     >
       <WorkflowTopbarInterface workflow={workflow} token={token} />
-      <div className="flex flex-col md:flex-row overflow-hidden">
+      <div className="flex flex-grow flex-col md:flex-row overflow-hidden">
         <WorkflowInputsInterface workflowId={workflow.id} />
         <WorkflowOutputsInterface
           workflowId={workflow.id}

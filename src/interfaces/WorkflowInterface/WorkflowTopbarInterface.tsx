@@ -1,9 +1,9 @@
 import React from 'react';
 import { faCodeFork } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import clsx from 'clsx';
-import { Anchor, Box, Button, Group, Image, useMantineColorScheme } from '@mantine/core';
+import { Anchor, Box, Group, Image, useMantineColorScheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
+import Button from '@/components/Button/Button';
 import { useRoboflowUrls } from '@/hooks/useRoboflowUrls';
 import { Workflow } from '@/types/workflow';
 
@@ -49,12 +49,9 @@ const WorkflowTopbarInterface: React.FC<WorkflowTopbarInterfaceProps> = ({ workf
             component="a"
             href={buildForkUrl(token)}
             target="_blank"
-          >
-            <Group gap="xs" wrap="nowrap">
-              <FontAwesomeIcon size="sm" icon={faCodeFork} />
-              {isSmallScreen ? 'Fork' : 'Fork workflow'}
-            </Group>
-          </Button>
+            label={isSmallScreen ? 'Fork' : 'Fork workflow'}
+            icon={faCodeFork}
+          />
         </Group>
       </Group>
     </Box>
