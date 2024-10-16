@@ -3,10 +3,10 @@ import { useMemo } from 'react';
 const DEFAULT_ROBOFLOW_DOMAIN = 'app.roboflow.com';
 
 interface WorkflowUtils {
-  urls: UrlBuilder;
+  urls: WorkflowUrls;
 }
 
-class UrlBuilder {
+class WorkflowUrls {
   private baseUrl: string;
 
   constructor(domain: string) {
@@ -31,7 +31,7 @@ export function useWorkflow(): WorkflowUtils {
     return import.meta.env.VITE_ROBOFLOW_DOMAIN || DEFAULT_ROBOFLOW_DOMAIN;
   }, []);
 
-  const urls = new UrlBuilder(domain);
+  const urls = new WorkflowUrls(domain);
 
   return {
     urls,
