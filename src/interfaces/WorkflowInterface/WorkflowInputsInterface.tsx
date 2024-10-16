@@ -1,6 +1,7 @@
 import React from 'react';
 import { faFileImage } from '@fortawesome/free-regular-svg-icons';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { Stack } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import { Debug } from '@/actions-core';
 import Button from '@/components/Button/Button';
@@ -19,9 +20,13 @@ const WorkflowInputsInterface: React.FC<WorkflowInputsInterfaceProps> = ({ workf
   const isSmallScreen = useMediaQuery('(max-width: 640px)');
 
   return (
-    <div className="flex flex-col md:w-1/3 gap-2 p-2">
-      <div className="flex h-1/2 sm:h-1/4 md:h-full md:flex-col items-center justify-center w-full gap-2">
-        <Image src={imageSrc} alt={imageAlt} className="md:w-full h-auto object-cover rounded" />
+    <Stack className="h-1/4 md:h-full md:w-1/3 p-2" gap="xs" p="xs">
+      <div className="flex h-full md:flex-col items-center justify-center w-full gap-2">
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          className="w-2/3 md:w-full h-auto object-cover rounded"
+        />
         <Dropzone
           className="w-full h-full bg-gray-100"
           label="Drop or upload an image here"
@@ -44,7 +49,7 @@ const WorkflowInputsInterface: React.FC<WorkflowInputsInterfaceProps> = ({ workf
         action={Debug}
         actionArgs={['running workflow', workflowId]}
       />
-    </div>
+    </Stack>
   );
 };
 
