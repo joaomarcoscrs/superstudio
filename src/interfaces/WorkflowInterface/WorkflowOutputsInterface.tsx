@@ -18,7 +18,7 @@ const WorkflowOutputsInterface: React.FC<WorkflowOutputsInterfaceProps> = ({
 
   if (!output) {
     return (
-      <Paper className="flex flex-col items-center justify-center w-full max-h-full gap-2 font-mono">
+      <Paper className="flex flex-col items-center justify-center w-full h-full gap-2 font-mono">
         <Text
           className={`${colorScheme === 'dark' ? 'text-gray-400' : 'text-gray-500'} font-mono text-xl`}
         >
@@ -28,8 +28,8 @@ const WorkflowOutputsInterface: React.FC<WorkflowOutputsInterfaceProps> = ({
     );
   }
   return (
-    <div className="flex flex-col items-center justify-center w-full max-h-full gap-2 font-mono">
-      <JsonInput value={output} onChange={() => {}} />
+    <div className="w-full max-h-full overflow-hidden">
+      <JsonInput value={output} onChange={() => {}} editable={false} />
     </div>
   );
 };
