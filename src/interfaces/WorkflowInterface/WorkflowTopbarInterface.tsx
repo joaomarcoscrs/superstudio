@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { Anchor, Box, Group, Image, useMantineColorScheme } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import Button from '@/components/Button/Button';
-import { useRoboflowUrls } from '@/hooks/useRoboflowUrls';
+import { useWorkflow } from '@/hooks/useWorkflow';
 import { Workflow } from '@/types/workflow';
 
 export interface WorkflowTopbarInterfaceProps {
@@ -16,7 +16,7 @@ export interface WorkflowTopbarInterfaceProps {
 const WorkflowTopbarInterface: React.FC<WorkflowTopbarInterfaceProps> = ({ workflow, token }) => {
   const { colorScheme } = useMantineColorScheme();
   const isSmallScreen = useMediaQuery('(max-width: 640px)');
-  const { buildForkUrl, buildShareableUrl } = useRoboflowUrls();
+  const { urls } = useWorkflow();
 
   return (
     <Box
@@ -27,7 +27,7 @@ const WorkflowTopbarInterface: React.FC<WorkflowTopbarInterfaceProps> = ({ workf
     >
       <Group justify="space-between" wrap="nowrap">
         <Anchor
-          href={buildShareableUrl(token)}
+          href={urls.shareable(token)}
           target="_blank"
           truncate
           className={clsx(
@@ -49,7 +49,7 @@ const WorkflowTopbarInterface: React.FC<WorkflowTopbarInterfaceProps> = ({ workf
             radius="md"
             size="xs"
             component="a"
-            href={buildForkUrl(token)}
+            href={urls.fork(token)}
             target="_blank"
             label={isSmallScreen ? 'Fork' : 'Fork workflow'}
             icon={faCodeFork}

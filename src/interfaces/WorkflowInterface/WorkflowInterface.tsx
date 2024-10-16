@@ -8,7 +8,7 @@ import WorkflowTopbarInterface from './WorkflowTopbarInterface';
 export interface WorkflowInterfaceProps {
   interfaceId: string;
   token: string;
-  workflow: Workflow;
+  workflow?: Workflow;
   examples: WorkflowExample[];
   workflowToken: string;
   className?: string;
