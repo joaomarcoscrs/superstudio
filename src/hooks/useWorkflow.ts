@@ -1,39 +1,49 @@
 import { useMemo } from 'react';
+import api, { Api } from '@/utils/api';
 
 const DEFAULT_ROBOFLOW_DOMAIN = 'app.roboflow.com';
 
 interface WorkflowUtils {
   urls: WorkflowUrls;
+  service: WorkflowService;
 }
 
 class WorkflowUrls {
-  private baseUrl: string;
+  private baseAppUrl: string;
 
-  constructor(domain: string) {
-    this.baseUrl = `https://${domain}`;
-  }
-
-  private _workflowUrl(path: string, token: string) {
-    return `${this.baseUrl}/workflows/${path}/${token}`;
+  constructor(appDomain: string) {
+    this.baseAppUrl = `https://${appDomain}`;
   }
 
   shareable(token: string) {
-    return this._workflowUrl('embed', token);
+    return `${this.baseAppUrl}/workflows/embed/${token}`;
   }
 
   fork(token: string) {
-    return this._workflowUrl('fork', token);
+    return `${this.baseAppUrl}/workflows/fork/${token}`;
+  }
+}
+
+// TODO: move this to a separate file when it gets more complex
+class WorkflowService {
+  constructor(private api: Api) {
+    this.api = api;
+  }
+
+  async fetchWorkflow(token: string) {
+    return this.api.workflows.fetch(token);
   }
 }
 
 export function useWorkflow(): WorkflowUtils {
-  const domain = useMemo(() => {
+  const appDomain = useMemo(() => {
     return import.meta.env.VITE_ROBOFLOW_DOMAIN || DEFAULT_ROBOFLOW_DOMAIN;
   }, []);
 
-  const urls = new WorkflowUrls(domain);
+  const urls = new WorkflowUrls(appDomain);
 
   return {
     urls,
+    service: new WorkflowService(api),
   };
 }
